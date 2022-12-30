@@ -80,7 +80,7 @@ jobs:
         files: '${{ env.ARTIFACT_PATH }}/*'
         target_commitish: '${{ github.base_ref }}'
         draft: true
-        prerelease: ${{ steps.parse-semver.outputs.is-prerelease }}
+        prerelease: ${{ steps.parse-semver.outputs.prerelease && true || false }}
         token: ${{ steps.generate-token.outputs.token }}
         fail_on_unmatched_files: true
 
