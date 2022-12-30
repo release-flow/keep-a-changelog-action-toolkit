@@ -49,12 +49,12 @@ jobs:
 
     - name: Update changelog
       id: update-changelog
-      uses: ./prepare-release
+      uses: release-flow/keep-a-changelog-action/prepare-release@v1
       with:
         release-type: ${{ github.event.inputs.release-type }}
 
     # TODO: update package.json version
-    
+
     - name: Create Pull Request
       id: create-release-pr
       uses: peter-evans/create-pull-request@v4
