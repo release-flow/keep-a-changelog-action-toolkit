@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   pull_request:
@@ -25,6 +25,6 @@ jobs:
 
     - name: Rebuild the dist directory
       run: |
-        npm run build
-        npm run package
+        npm run clean
+        npm run all
 
