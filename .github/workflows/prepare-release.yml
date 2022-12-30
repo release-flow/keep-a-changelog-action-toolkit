@@ -35,25 +35,11 @@ jobs:
         app_id: ${{ secrets.RELEASEBOT_APP_ID }}
         private_key: ${{ secrets.RELEASEBOT_PRIVATE_KEY }}
 
-    - name: 'Ensure autorelease label exists'
-      run: |
-        LABEL=$(gh api repos/$GITHUB_REPOSITORY/labels --jq '.[] | select(.name=="autorelease")')
-        if [[ -z "$LABEL" ]]; then
-          echo "Creating 'autorelease' label"
-          gh api --silent repos/$GITHUB_REPOSITORY/labels -f name="autorelease" -f color="baa938" -f description="This is an automatically-created PR to trigger a release"
-        else
-          echo "'autorelease' label exists"
-        fi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Update changelog
       id: update-changelog
       uses: release-flow/keep-a-changelog-action/prepare-release@v1
       with:
         release-type: ${{ github.event.inputs.release-type }}
-
-    # TODO: update package.json version
 
     - name: Create Pull Request
       id: create-release-pr
