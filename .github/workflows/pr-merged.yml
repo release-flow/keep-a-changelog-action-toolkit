@@ -54,10 +54,10 @@ jobs:
       with:
         version: ${{ steps.get-release-info.outputs.release-version }}
 
-
     - name: Create NPM package artifact
       run: |
         [ -d "${{ env.ARTIFACT_PATH }}" ] && rm -rf ${{ env.ARTIFACT_PATH }}
+        mkdir ${{ env.ARTIFACT_PATH }}
         npm pack --pack-destination ${{ env.ARTIFACT_PATH }}
 
     # We need to create a token
