@@ -40,7 +40,7 @@ jobs:
       uses: release-flow/keep-a-changelog-action/prepare-release@v1
       with:
         release-type: ${{ github.event.inputs.release-type }}
-        preid: ${{ github.event.inputs.preid }}
+        prerelease-identifier: ${{ github.event.inputs.preid }}
 
     - name: Create Pull Request
       id: create-release-pr
