@@ -16,6 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Setup Nodejs
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+
       # The PR we are merging should have updated the changelog to set the target release version as the
       # latest version (this happens in prepare-release.yml)
     - name: Get latest release info
@@ -33,6 +38,9 @@ jobs:
       id: parse-semver
       with:
         version: ${{ steps.get-release-info.outputs.release-version }}
+
+    - name: Install dependencies
+      run: npm ci
 
     # Build the npm package
     - name: Build dist
