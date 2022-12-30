@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
     inputs:
       release-type:
-        description: 'Release type'
+        description: 'Release type. See `npm-version` docs for more details.'
         type: choice
         required: true
         options:
@@ -14,8 +14,8 @@ on:
         - prepatch
         - prerelease
         default: patch
-      prerelease-identifier:
-        description: 'Pre-release identifier (only for pre-release builds)'
+      preid:
+        description: 'Pre-release identifier (only for pre-release builds). See `npm-version` docs for more details.'
         required: false
 
 name: '[autorelease] Prepare release PR'
@@ -40,6 +40,7 @@ jobs:
       uses: release-flow/keep-a-changelog-action/prepare-release@v1
       with:
         release-type: ${{ github.event.inputs.release-type }}
+        preid: ${{ github.event.inputs.preid }}
 
     - name: Create Pull Request
       id: create-release-pr
